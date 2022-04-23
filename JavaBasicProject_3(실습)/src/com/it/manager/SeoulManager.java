@@ -63,8 +63,68 @@ public class SeoulManager {
 					   System.out.println("명소:"+title.text());
 					   System.out.println("주소:"+address.text());
 					   System.out.println("설명:"+msg.text());
-					   System.out.println("이미지:"+poster.attr("style"));
+					   //System.out.println("이미지:"+poster.attr("style"));
+					   String image=poster.attr("style");
+					   image="https://korean.visitseoul.net"+image.substring(image.indexOf("'")+1,image.lastIndexOf("'"));
+					   System.out.println(image);
+					   // background-image:url('/csomm/getImage?srvcId=MEDIA&parentSn=50320&fileTy=MEDIA&fileNo=2&thumbTy=L');
+					   /*
+					    *   = String / List
+					    *   1. String : 문자열을 관리 클래스 
+					    *      String s="문자열"; ==> 일반 데이터형 (******)
+					    *      String s=new String("문자열"); ==> 클래스형
+					    *      => char[]을 클래스로 제작  
+					    *      => final 클래스 => 변경해서 사용할 수 없다 (산속을 받을 수 없다)
+					    *      => 문자열 : "" , 문자 : ''
+					    *   2. 주요 메소드 
+					    *      1) equals : 문자를 비교할 때 사용 (아이디비교 , 비밀번호 비교) => 대소문자 구분  
+					    *      2) equalsIgnoreCase : 문자열을 비교할때 사용 => 대소문자 구분없이 비교 
+					    *      3) length() : 문자의 갯수 **문자번호 0번부터
+					    *      4) substring() : 문자를 자를 경우에 사용 
+					    *         substring(int start)
+					    *         substring(int start,int end)
+					    *         String s="Hello Java!!";
+					    *                   01234567891011  => length() => 12
+					    *         s=s.substring(3) => lo Java!!
+					    *         s=s.substring(6) => Java!!
+					    *         s=s.substring(6,10) => Jav => end-1
+					    *      5) indexOf()
+					    *      6) lastIndexOf() 찾기 
+					    *      
+					    *      String s="Hello Java";
+					    *      int s.indexOf("a") =>
+					    *      s.lastIndexOf("a")  <=
+					    *      7) trim() => 좌우의 공백을 제거 
+					    *      8) contains() => 포함 단어 (like)  '%A%'
+					    *         A% => startsWith
+					    *         %A => endsWith 
+					    *         ------------------ 서제스트 (자동완성기)
+					    *      9) valueOf() => 모든 데이터형을 문자열 
+					    *         valueOf(1) => "1"
+					    *         valueOf(true) => "true"
+					    *      10) split => 단어별로 잘라서 저장 => String[]
+					    *          ------ 정규식 (자음) ㄱ
+					    *          문자형태를 만들어서 찾기 , 저장 
+					    *          
+					    *          1. 알파벳 : [A-Z] , [a-z] ==> [A-Za-z]
+					    *          2. 숫자 : [0-9]
+					    *          3. 한글 : [가-힣]
+					    *          
+					    *          ip  3,3,3,3 , 1,1,1,3 ,3,2,1,1
+					    *          [0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}
+					    *          
+					    *     List => 자료구조 (CURD) 
+					    *             Create , Update , Read , Delete 
+					    *             ------(Insert)(UPdate) (select) (delete) 
+					    *             1. 추가  : add()
+					    *             2. 수정 : set()
+					    *             3. 검색 : get()
+					    *             4. 삭제 : remove()
+					    *             5. 저장된 갯수 : size()
+					    *             메모리에 데이터 입출력 
+					    */
 					   System.out.println("================================");
+					  
 				   }catch(Exception ex) {}
 			   }
 		  }
