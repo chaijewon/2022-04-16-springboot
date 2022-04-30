@@ -178,12 +178,13 @@ public class SeoulDAO {
 			// 1. 연결
 			getConnection();
 			// 2. SQL문장을 만든다 
-			String sql="SELECT * FROM seoul_hotel "
+			String sql="SELECT no,name,score,address,poster,images FROM seoul_hotel "
 					  +"WHERE no="+no; // Statement
 			ps=conn.prepareStatement(sql);
 			// 3. ?가 있으면 채운다  ==> 통과 
 			// 4. 실행요청 => 결과값을 받는다
 			ResultSet rs=ps.executeQuery();// no,name,score,address,poster,images
+			rs.next();
 			// 5. 값을 (VO에 값을 채운다)
 			vo.setNo(rs.getInt(1));
 			vo.setName(rs.getString(2));
@@ -191,6 +192,7 @@ public class SeoulDAO {
 			vo.setAddress(rs.getString(4));
 			vo.setPoster(rs.getString(5));
 			vo.setImages(rs.getString(6));
+			System.out.println(vo.getImages());
 			// 6. ResultSet => close()
 			rs.close();
 		}catch(Exception ex)
