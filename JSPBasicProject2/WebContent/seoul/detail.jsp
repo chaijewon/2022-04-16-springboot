@@ -54,7 +54,7 @@ h1{
        </tr>
        <tr>
          <td colspan="5" class="text-right">
-           <a href="javascript:history.back()" class="btn btn-sm btn-danger">목록</a>
+           <a href="list.jsp" class="btn btn-sm btn-danger">목록</a>
          </td>
        </tr>
       </table>

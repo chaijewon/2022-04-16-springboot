@@ -23,6 +23,27 @@
     //2-1 총페이지 읽기
     int totalpage=dao.hotelTotalPage();
     //3. HTML을 이용해서 출력 
+    
+    // cookie 읽기
+    /*
+        Cookie cookie=new Cookie("h"+no,no => getValue());
+                                 ------ --
+                                 getName()
+    */
+    Cookie[] cookies=request.getCookies();
+    List<HotelVO> hList=new ArrayList<HotelVO>();
+    if(cookies!=null)
+    {
+    	for(int i=cookies.length-1;i>=0;i--)
+    	{
+    		if(cookies[i].getName().startsWith("h"))
+    		{
+    			String no=cookies[i].getValue();
+    			HotelVO vo=dao.hotelDetailData(Integer.parseInt(no));
+    			hList.add(vo);
+    		}
+    	}
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -71,6 +92,27 @@ h1{
           <%= curpage %> page / <%=totalpage %> pages
         <a href="list.jsp?page=<%=curpage<totalpage?curpage+1:curpage %>" class="btn btn-sm btn-primary">다음</a>
       </div>
+    </div>
+    <div style="height: 30px"></div>
+    <h3>최신본 호텔</h3>
+    <hr>
+    <div class="row">
+      <%
+         int k=0;
+         for(HotelVO vo:hList)
+         {
+        	if(k>10)
+        		break;
+      %>
+           <a href="detail.jsp?no=<%=vo.getNo()%>">
+            <img src="<%=vo.getPoster() %>" style="width: 100px;height: 100px"
+              title="<%=vo.getName() %>"
+            >
+           </a>
+      <%
+           k++;
+         }
+      %>
     </div>
   </div>
 </body>
