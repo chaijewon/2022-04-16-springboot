@@ -167,6 +167,38 @@ public class BoardDAO {
 	   }
    }
    // 4. 상세보기 => 조회수 올리기 (UPDATE), 상세내용 (SELECT) 
+   public BoardVO boardDetailData(int no)//사용자가 요청한 데이터는 매개변수 
+   {
+	   BoardVO vo=new BoardVO();
+	   try
+	   {
+		   //1. 연결 
+		   getConnection();
+		   //2. SQL문장 
+		   String sql="UPDATE jspBoard SET "
+				     +"hit=hit+1 "
+				     +"WHERE no=?"; // 조회수 증가 
+		   ps=conn.prepareStatement(sql);
+		   //?에 값을 채운다
+		   ps.setInt(1,no);
+		   // 실행 요청 
+		   ps.executeUpdate();
+		   
+		   //2. 실제 데이터를 가지고 온다 
+		   sql="SELECT no,name,subject,content,DATE_FORMAT(regdate,'%Y-%m-%d'), hit "
+		      +"FROM jspBoard "
+			  +"WHERE no=?";
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return vo;
+   }
    // 5. 수정 => 비밀번호 확인 (UPDATE,SELECT) 
    // 6. 삭제 => 비밀번호 확인 (DELETE,SELECT)
    
