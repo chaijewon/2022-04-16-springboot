@@ -299,6 +299,44 @@ public class BoardDAO {
 	   return bCheck;
    }
    // 6. 삭제 => 비밀번호 확인 (DELETE,SELECT)
+   public int boardDelete(int no,String pwd)
+   {
+	   int result=0;
+	   try
+	   {
+		   //1. 연결 
+		   getConnection();
+		   //2. 비밀번호 읽기
+		   String sql="SELECT pwd FROM jspBoard WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   String db_pwd=rs.getString(1);
+		   rs.close();
+		   
+		   if(db_pwd.equals(pwd))
+		   {
+			   result=1;
+			   sql="DELETE FROM jspBoard WHERE no=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setInt(1, no);
+			   ps.executeUpdate();
+		   }
+		   else
+		   {
+			   result=0;
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return result;
+   }
    
 }
 
