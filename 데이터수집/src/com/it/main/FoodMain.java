@@ -49,8 +49,8 @@ public class FoodMain {
 		// TODO Auto-generated method stub
         FoodMain fm=new FoodMain();
         //fm.foodCategoryData();
-        fm.foodHouseData();
-        //fm.foodLocationData();
+        //fm.foodHouseData();
+        fm.foodLocationData();
 	}
 	public void foodCategoryData()
 	{
