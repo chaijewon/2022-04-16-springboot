@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,com.it.dao.*,java.text.*"%>
+    pageEncoding="UTF-8" import="java.util.*,com.it.dao.*,java.text.*" errorPage="error.jsp"%>
 <jsp:useBean id="dao" class="com.it.dao.BoardDAO"/>
 <%-- BoardDAO dao=new BoardDAO() 
      id="dao" class="com.it.dao.BoardDAO"
@@ -8,6 +8,7 @@
             <jsp:~~~> : JSP액션태그 
 --%>
 <%
+    //int a=10/0;
     //1. 사용자 입력값 받기 (page)
     String strPage=request.getParameter("page"); // < [1][2][3] >
     // default페이지 설정 
@@ -81,7 +82,7 @@ h1 {
                  <tr>
 		          <td class="text-center" width=10%><%=vo.getNo() %></td>
 		          <td width=45%>
-		            <%=vo.getSubject() %>&nbsp;
+		            <a href="detail.jsp?no=<%=vo.getNo()%>"><%=vo.getSubject() %></a>&nbsp;
 		            <%
 		                if(today.equals(vo.getDbday()))
 		                {

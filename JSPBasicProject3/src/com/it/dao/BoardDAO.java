@@ -140,6 +140,32 @@ public class BoardDAO {
 	   return total;
    }
    // 3. 새글 올리기 (INSERT) => <jsp:useBean> <jsp:setProperty> 
+   public void boardInsert(BoardVO vo)
+   {
+	   try
+	   {
+		   //1. 연결  ==> 흐름 
+		   getConnection();
+		   //2. SQL문장 
+		   String sql="INSERT INTO jspBoard(name,subject,content,pwd,regdate) "
+				     +"VALUES(?,?,?,?,now())";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, vo.getName());
+		   ps.setString(2, vo.getSubject());
+		   ps.setString(3, vo.getContent());
+		   ps.setString(4, vo.getPwd());
+		   
+		   // 실행 ==> commit => java => autocommit
+		   ps.executeUpdate(); //commit포함 
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
    // 4. 상세보기 => 조회수 올리기 (UPDATE), 상세내용 (SELECT) 
    // 5. 수정 => 비밀번호 확인 (UPDATE,SELECT) 
    // 6. 삭제 => 비밀번호 확인 (DELETE,SELECT)
