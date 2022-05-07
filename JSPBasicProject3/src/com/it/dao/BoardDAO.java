@@ -189,6 +189,23 @@ public class BoardDAO {
 		      +"FROM jspBoard "
 			  +"WHERE no=?";
 		   
+		   // 전송 
+		   ps=conn.prepareStatement(sql);
+		   // ?에 값을 채운다 
+		   ps.setInt(1, no);
+		   // 실행 결과를 받는다 
+		   ResultSet rs=ps.executeQuery();//SELECT => 데이터를 읽어 온다 
+		   // 커서위치 변경 =>  데이터가 출력된 위치에 커서가 존재 
+		   rs.next();
+		   // 데이터 읽기 
+		   vo.setNo(rs.getInt(1));
+		   vo.setName(rs.getString(2));
+		   vo.setSubject(rs.getString(3));
+		   vo.setContent(rs.getString(4));
+		   vo.setDbday(rs.getString(5));
+		   vo.setHit(rs.getInt(6));
+		   rs.close();
+		   
 	   }catch(Exception ex)
 	   {
 		   ex.printStackTrace();
@@ -200,6 +217,87 @@ public class BoardDAO {
 	   return vo;
    }
    // 5. 수정 => 비밀번호 확인 (UPDATE,SELECT) 
+   public BoardVO boardUpdateData(int no)//사용자가 요청한 데이터는 매개변수 
+   {
+	   BoardVO vo=new BoardVO();
+	   try
+	   {
+		   //1. 연결 
+		   getConnection();
+		   //2. SQL문장 
+		   String sql="SELECT no,name,subject,content,DATE_FORMAT(regdate,'%Y-%m-%d'), hit "
+		      +"FROM jspBoard "
+			  +"WHERE no=?";
+		   
+		   // 전송 
+		   ps=conn.prepareStatement(sql);
+		   // ?에 값을 채운다 
+		   ps.setInt(1, no);
+		   // 실행 결과를 받는다 
+		   ResultSet rs=ps.executeQuery();//SELECT => 데이터를 읽어 온다 
+		   // 커서위치 변경 =>  데이터가 출력된 위치에 커서가 존재 
+		   rs.next();
+		   // 데이터 읽기 
+		   vo.setNo(rs.getInt(1));
+		   vo.setName(rs.getString(2));
+		   vo.setSubject(rs.getString(3));
+		   vo.setContent(rs.getString(4));
+		   vo.setDbday(rs.getString(5));
+		   vo.setHit(rs.getInt(6));
+		   rs.close();
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return vo;
+   }
+   
+   public boolean boardUpdate(BoardVO vo)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   // 연결 
+		   getConnection();
+		   // 비밀번호 검색 
+		   String sql="SELECT pwd FROM jspBoard WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, vo.getNo());
+		   // 결과값 받기 
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   String db_pwd=rs.getString(1);
+		   rs.close();
+		   // 비교 
+		   if(db_pwd.equals(vo.getPwd()))// 비밀번호가 맞다면 
+		   {
+			   bCheck=true;
+			   // 실제 수정 
+			   sql="UPDATE jspBoard SET "
+				  +"name=?,subject=?,content=? "
+				  +"WHERE no=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, vo.getName());
+			   ps.setString(2, vo.getSubject());
+			   ps.setString(3, vo.getContent());
+			   ps.setInt(4, vo.getNo());
+			   ps.executeUpdate();
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return bCheck;
+   }
    // 6. 삭제 => 비밀번호 확인 (DELETE,SELECT)
    
 }

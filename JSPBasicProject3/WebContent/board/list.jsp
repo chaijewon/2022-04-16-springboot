@@ -108,38 +108,38 @@ h1 {
              <%
                   if(startPage>1) //startPage=1,4,7...
                   {
-              %>
-			         <li><a href="list.jsp?page=<%=startPage-1%>">&lt;</a></li>
-			  <%
-                  }
-			  %>
-			  <%
-			      for(int i=startPage;i<=endPage;i++)
-			      {
-			    	  String css="";
-			    	  if(curpage==i)
-			    		  css="class=active";
-			    	  else
-			    		  css="";
-			  %>
-			          <li <%=css %>><a href="list.jsp?page=<%=i%>"><%=i %></a></li>
-			  <%
-			      }
-			  %>
-			  <%
-			     if(endPage<totalpage)
-			     {
-			  %>
-			        <li><a href="list.jsp?page=<%=endPage+1%>">&gt;</a></li>
-			  <%
-			     }
-			  %>
-			</ul>
-       </div>
-     </div>
-   </div>
-</body>
-</html>
+                	  %>
+ 			         <li><a href="list.jsp?page=<%=startPage-1%>">&lt;</a></li>
+ 			  <%
+                   }
+ 			  %>
+ 			  <%
+ 			      for(int i=startPage;i<=endPage;i++)
+ 			      {
+ 			    	  String css="";
+ 			    	  if(curpage==i)
+ 			    		  css="class=active";
+ 			    	  else
+ 			    		  css="";
+ 			  %>
+ 			          <li <%=css %>><a href="list.jsp?page=<%=i%>"><%=i %></a></li>
+ 			  <%
+ 			      }
+ 			  %>
+ 			  <%
+ 			     if(endPage<totalpage)
+ 			     {
+ 			  %>
+ 			        <li><a href="list.jsp?page=<%=endPage+1%>">&gt;</a></li>
+ 			  <%
+ 			     }
+ 			  %>
+ 			</ul>
+        </div>
+      </div>
+    </div>
+ </body>
+ </html>
 
 
 
