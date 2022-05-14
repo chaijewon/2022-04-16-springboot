@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <!-- 
+   Content Model : (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, 
+   reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+   ? => 사용(X),사용(O)
+   | => 선택 
+   + => 1번이상 반드시 사용
+   * => 0번이상 
+   default => 반드시 한번 사용 
+  -->
+<configuration>
+  <typeAliases>
+    <typeAlias type="com.it.dao.FoodCategoryVO" alias="FoodCategoryVO"/>
+  </typeAliases>
+  <!-- getConnection() , disConnection() -->
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/db0416?serverTimezone=UTC"/>
+        <property name="username" value="root"/>
+        <property name="password" value="1111"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <!-- PreparedStatement : SQL -->
+  <mappers>
+    <mapper resource="com/it/dao/food-mapper.xml"/>
+  </mappers>
+</configuration>
