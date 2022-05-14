@@ -81,7 +81,7 @@ public class FoodMain {
         		dao.foodCategoryInsert(vo);
         		System.out.println("==================================================");
         	}
-        }catch(Exception ex){}
+        }catch(Exception ex){ex.printStackTrace();}
 	}
 	
 	public void foodHouseData()

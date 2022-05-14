@@ -114,14 +114,13 @@ public class DataDAO {
 	   try
 	   {
 		   getConnection();
-		   String sql="INSERT INTO food_category VALUES("
-				     +"?,?,?,?,?)";
+		   String sql="INSERT INTO food_category(title,subject,poster,link) VALUES("
+				     +"?,?,?,?)";
 		   ps=conn.prepareStatement(sql);
-		   ps.setInt(1, vo.getCno());
-		   ps.setString(2, vo.getTitle());
-		   ps.setString(3, vo.getSubject());
-		   ps.setString(4, vo.getPoster());
-		   ps.setString(5, vo.getLink());
+		   ps.setString(1, vo.getTitle());
+		   ps.setString(2, vo.getSubject());
+		   ps.setString(3, vo.getPoster());
+		   ps.setString(4, vo.getLink());
 		   ps.executeUpdate();
 	   }catch(Exception ex)
 	   {
@@ -200,7 +199,7 @@ public class DataDAO {
 	   try
 	   {
 		   getConnection();
-		   String sql="INSERT INTO food_location VALUES("
+		   String sql="INSERT INTO foodLocation VALUES("
 				     +"?,?,?,?,?,?,?,?,?,?,?)";
 		   ps=conn.prepareStatement(sql);
 		   ps.setInt(1, vo.getNo());
