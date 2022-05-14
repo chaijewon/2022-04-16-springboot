@@ -23,4 +23,22 @@ public class FoodDAO {
    {
 	   return ssf.openSession().selectList("foodCategoryData");
    }
+   /*
+    *  <select id="foodListData" resultType="com.it.dao.FoodHouseVO" parameterType="int">
+    SELECT * FROM food_house
+    WHERE cno=#{cno}
+  </select>
+  <select id="foodCategoryInfo" resultType="FoodCategoryVO" parameterType="int">
+    SELECT * FROM food_category
+    WHERE cno=#{cno}
+  </select>
+    */
+   public static FoodCategoryVO foodCategoryInfo(int cno)
+   {
+	   return ssf.openSession().selectOne("foodCategoryInfo",cno);
+   }
+   public static List<FoodHouseVO> foodListData(int cno)
+   {
+	   return ssf.openSession().selectList("foodListData",cno);
+   }
 }

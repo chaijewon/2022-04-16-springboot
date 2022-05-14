@@ -12,6 +12,7 @@
    default => 반드시 한번 사용 
   -->
 <configuration>
+  <!--  getConnection/disConnection() -->
   <typeAliases>
     <typeAlias type="com.it.dao.FoodCategoryVO" alias="FoodCategoryVO"/>
   </typeAliases>
