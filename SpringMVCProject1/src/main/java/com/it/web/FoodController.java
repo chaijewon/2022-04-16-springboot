@@ -49,6 +49,16 @@ public class FoodController {
     	model.addAttribute("list", list);
     	return "food/food_list";
     }
+    @RequestMapping("food/food_detail.do")
+    public String food_detail(int no,Model model)
+    {
+    	FoodVO vo=dao.foodDetailData(no);
+    	String addr=vo.getAddress();
+    	addr=addr.substring(0,addr.indexOf("지"));
+    	model.addAttribute("addr1", addr);
+    	model.addAttribute("vo", vo);
+    	return "food/food_detail";
+    }
 }
 
 
