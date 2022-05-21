@@ -23,9 +23,20 @@
         p:username="root"
         p:password="1111"
      />
+     <bean id="dataSource" 
+          class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
+      <constructor-arg ref="ds" /> 
+      <property name="logFormatter"> 
+        <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter"> 
+        <property name="loggingType" value="MULTI_LINE" /> 
+        <property name="sqlPrefix" value="SQL : "/> 
+        </bean> 
+      </property> 
+    </bean>
+     
      <!-- MyBatis로 전송  -->
      <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
-       p:dataSource-ref="ds"
+       p:dataSource-ref="dataSource"
      />
      <!-- Mapper구현 -->
      <bean id="mapper" class="org.mybatis.spring.mapper.MapperFactoryBean"

@@ -22,6 +22,11 @@ public class MainClass {
         {
         	System.out.println((vo.getCno())+"."+vo.getTitle());
         }
+        System.out.println("================================");
+        CategoryVO vo=mc.dao.categoryCnoData(1);
+        System.out.println(vo.getCno());
+        System.out.println(vo.getTitle());
+        System.out.println(vo.getSubject());
         
 	}
 
