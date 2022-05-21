@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 
+       public Sawon(int sabun, String name, String dept) {
+		this.sabun = sabun;
+		this.name = name;
+		this.dept = dept;
+	}
+     -->
+    <bean id="sa" class="com.it.spring3.Sawon"
+      c:sabun="1"
+      c:dept="개발부"
+      c:name="아순신"
+      init-method="init"
+      destroy-method="destory"
+    />
+    <bean id="sa1" class="com.it.spring3.Sawon"
+      c:_0="2"
+      c:_1="심청이"
+      c:_2="기획부"
+      init-method="init"
+      destroy-method="destory"
+    />
+</beans>
