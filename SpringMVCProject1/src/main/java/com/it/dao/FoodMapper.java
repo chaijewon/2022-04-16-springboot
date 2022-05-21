@@ -8,10 +8,14 @@ public interface FoodMapper {
 		 +"FROM food_category")
   public List<CategoryVO> categoryListData();
   // 카테고리별 맛집 
-  @Select("SELECT no,cno,poster,name,tel,type "
+  @Select("SELECT no,cno,poster,name,tel,type,score "
 		 +"FROM food_house "
 		 +"WHERE cno=#{cno}")
   public List<FoodVO> categoryFoodListData(int cno);
+  
+  @Select("SELECT title,subject FROM food_category "
+		 +"WHERE cno=#{cno}")
+  public CategoryVO categoryInfodData(int cno);
   // 상세보기 
   @Select("SELECT * FROM food_house "
 		 +"WHERE no=#{no}")

@@ -34,6 +34,21 @@ public class FoodController {
     	model.addAttribute("list", list);
     	return "food/category";// 파일명만 설정 
     }
+    @RequestMapping("food/food_list.do")
+    public String food_list(int cno,Model model)
+    {
+    	List<FoodVO> list=dao.categoryFoodListData(cno);
+    	for(FoodVO vo:list)
+    	{
+    		String poster=vo.getPoster();
+    		poster=poster.substring(0,poster.indexOf("^"));
+    		vo.setPoster(poster);
+    	}
+    	CategoryVO vo=dao.categoryInfodData(cno);
+    	model.addAttribute("vo", vo);
+    	model.addAttribute("list", list);
+    	return "food/food_list";
+    }
 }
 
 
