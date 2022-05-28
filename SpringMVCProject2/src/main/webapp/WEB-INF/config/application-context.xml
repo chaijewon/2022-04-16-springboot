@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+    <!-- 사용자 정의 클래스 등록 = 스프링에 관리 요청 (생성,소멸) -->
+    <!-- 1. AOP선언 -->
+    <aop:aspectj-autoproxy/>
+    <!-- 2.사용자 정의 클래스 등록 -->
+    <context:component-scan base-package="com.it.*"/>
+    <!-- 
+         @Component, 
+         @Repository, 
+         @Service, 
+         @Controller, 
+         @RestController, 
+         @ControllerAdvice, 
+         @Configuration
+     -->
+     <!-- MVC사용 -->
+     <mvc:annotation-driven/><!-- 한글(JSON) -->
+     <!--  
+          JSP로 요청결과값 전송 
+          ================= 화면 변경 
+           = forward (request의 결과값을 추가해서 전송)   return "경로명/파일명" 
+             Model => 전송 객체를 이용해서 데이터 전송 
+           = redirect (request를 초기화)   return "redirect:...do";
+             redirect:list.do?page=1 => RedirectAttributes 
+     -->
+     <!-- 화면 찾기(JSP) : ViewResolver -->
+     <bean id="viewResolver"
+         class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+         p:prefix="/"
+         p:suffix=".jsp"
+     />
+     <!-- 
+                 스프링에서 사용중인 ID => 파일업로드
+      -->
+     <bean id="multipartResolver"
+           class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+     />
+</beans>
+
+
+
+
+
+
+
+
+
