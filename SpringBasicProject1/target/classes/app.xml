@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 
+               스프링에서 클래스 등록
+        1. XML = 라이브러리 
+        2. Annotation = 사용자 정의 클래스 (메모리 할당)
+        3. XML+Annotation => 가장 많이 사용  
+        
+              클래스 등록
+          <bean id="" class="" scope=""> scope=> default(singleton(), 복제: prototype)
+               ====
+                             중복이 없다(primary key) => map (키,값) 
+     -->
+     <bean id="sa" class="com.it.spring3.Sawon" scope="prototype"/>
+     <!--  스프링 컨테이너는 클래스 메모리 할당 HashMap에 저장 
+           => 객체를 찾을때 (DL) => getBean()
+      -->
+</beans>

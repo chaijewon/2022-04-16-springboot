@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+    <!-- 데이터베이스 관련 (라이브러리 => 어노테이션이 존재하지 않는다) = 공통 사용 
+         MyBatis , JPA
+         1. 데이터베이스 정보 등록 
+            driver / url / username / password = BasicDataSource
+         2. MyBatis로 정보 전송 ( 연결 / 해제 )
+         3. Mapper구현 
+     -->
+     <!--  정보 저장  -->
+     <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+        p:driverClassName="com.mysql.cj.jdbc.Driver"
+        p:url="jdbc:mysql://localhost:3306/db0416?serverTimezone=UTC"
+        p:username="root"
+        p:password="1111"
+     />
+     <bean id="dataSource" 
+          class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
+      <constructor-arg ref="ds" /> 
+      <property name="logFormatter"> 
+        <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter"> 
+        <property name="loggingType" value="MULTI_LINE" /> 
+        <property name="sqlPrefix" value="SQL : "/> 
+        </bean> 
+      </property> 
+    </bean>
+     
+     <!-- MyBatis로 전송  -->
+     <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+       p:dataSource-ref="dataSource"
+     />
+     <!-- Mapper구현 -->
+     <bean id="mapper" class="org.mybatis.spring.mapper.MapperFactoryBean"
+       p:sqlSessionFactory-ref="ssf"
+       p:mapperInterface="com.it.dao.CategoryMapper"
+     />
+</beans>
+
+
+
+
+
+
+
+
+
