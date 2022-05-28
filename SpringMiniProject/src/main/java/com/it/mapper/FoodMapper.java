@@ -26,4 +26,26 @@ public interface FoodMapper {
   @Select("SELECT * FROM food_house "
 		 +"WHERE no=#{no}")
   public FoodVO foodDetailData(int no);
+  
+  // 찾기
+  /*
+   *   CONCAT => MySQL / MariaDB
+   *   ||     => Oracle  ===>  '%'||#{ss}||'%'
+   */
+  @Select("SELECT no,poster,name "
+		 +"FROM foodLocation "
+		 +"WHERE address LIKE CONCAT('%',#{ss},'%') "
+		 +"limit #{start},12")
+  public List<FoodVO> foodFindData(Map map);
+  
+  @Select("SELECT CEIL(COUNT(*)/12.0) FROM foodLocation "
+		 +"WHERE address LIKE CONCAT('%',#{ss},'%')")
+  public int foodFindTotalPage(String ss);
 }
+
+
+
+
+
+
+

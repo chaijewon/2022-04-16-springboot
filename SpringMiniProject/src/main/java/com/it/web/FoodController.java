@@ -72,6 +72,37 @@ public class FoodController {
 	   return "main/main";
    }
    
+   @RequestMapping("food/location.do") // GET/POST동시에 사용 
+   public String food_location(String page,String ss,Model model)
+   {
+	   if(ss==null)
+		   ss="강남";
+	   
+	   if(page==null)
+		   page="1";
+	   
+	   int curpage=Integer.parseInt(page);
+	   int start=(curpage*12)-12;
+	   Map map=new HashMap();
+	   map.put("ss", ss);
+	   map.put("start",start);
+	   List<FoodVO> list=dao.foodFindData(map);
+	   
+	   int totalpage=dao.foodFindTotalPage(ss);
+	   
+	   final int BLOCK=5;
+	   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+	   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+	   
+	   if(endPage>totalpage)
+		   endPage=totalpage;
+	   
+	   
+	   
+	   model.addAttribute("main_jsp", "../food/location.jsp");
+	   return "main/main";
+   }
+   
 }
 
 

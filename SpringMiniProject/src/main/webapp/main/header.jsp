@@ -53,7 +53,8 @@
       <li class="active"><a href="../main/main.do">Home</a></li>
       <li><a class="drop" href="#">맛집</a>
         <ul>
-          <li><a href="../food/location.do">지역별 맛집찾기</a></li>
+          <li><a href="../food/location.do">지역별 맛집찾기(일반)</a></li>
+          <li><a href="../food/location_vue.do">지역별 맛집찾기(Vue)</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">여행</a>

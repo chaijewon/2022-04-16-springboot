@@ -1,5 +1,6 @@
 package com.it.dao;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +28,24 @@ public class FoodDAO {
   public FoodVO foodDetailData(int no)
   {
 	  return mapper.foodDetailData(no);
+  }
+  /*
+   *  @Select("SELECT no,poster,name "
+		 +"FROM foodLocation "
+		 +"WHERE address LIKE CONCAT('%',#{ss},'%') "
+		 +"limit #{start},12")
+  public List<FoodVO> foodFindData(Map map);
+  
+  @Select("SELECT CEIL(COUNT(*)/12.0) FROM foodLocation "
+		 +"WHERE address LIKE CONCAT('%',#{ss},'%')")
+  public int foodFindTotalPage(String ss);
+   */
+  public List<FoodVO> foodFindData(Map map)
+  {
+	  return mapper.foodFindData(map);
+  }
+  public int foodFindTotalPage(String ss)
+  {
+	  return mapper.foodFindTotalPage(ss);
   }
 }
