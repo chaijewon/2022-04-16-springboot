@@ -91,6 +91,13 @@ public class FoodController {
 	   int totalpage=dao.foodFindTotalPage(ss);
 	   
 	   final int BLOCK=5;
+	   /*
+	    *   < [1][2][3][4][5] > ==> < [6][7][8][9][10] >
+	    *     sp           ep          sp          ep
+	    *     
+	    *     sp => curpage (1~5) => 1   ep => 5
+	    *           curpage (6~10) => 6  ep => 10
+	    */
 	   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 	   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 	   
@@ -98,8 +105,20 @@ public class FoodController {
 		   endPage=totalpage;
 	   
 	   
-	   
+	   model.addAttribute("curpage", curpage);
+	   model.addAttribute("totalpage", totalpage);
+	   model.addAttribute("list", list);
+	   model.addAttribute("startPage", startPage);
+	   model.addAttribute("endPage", endPage);
+	   model.addAttribute("ss", ss);
 	   model.addAttribute("main_jsp", "../food/location.jsp");
+	   return "main/main";
+   }
+   
+   @GetMapping("food/location_vue.do")
+   public String food_location_vue(Model model)
+   {
+	   model.addAttribute("main_jsp", "../food/location_vue.jsp");
 	   return "main/main";
    }
    

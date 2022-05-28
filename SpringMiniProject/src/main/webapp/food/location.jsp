@@ -54,7 +54,10 @@
       <!-- ################################################################################################ -->
       <nav class="pagination">
         <ul>
-         <c:forEach var="i" begin="1" end="${totalpage }">
+          <c:if test="${startPage>1 }">
+           <li><a href="../food/location.do?ss=${ss }&page=${startPage-1}">&lt;</a></li>
+          </c:if>
+         <c:forEach var="i" begin="${startPage }" end="${endPage }">
           <c:if test="${curpage==i }">
            <li class="current"><a href="../food/location.do?page=${i }&ss=${ss}">${i }</a></li>
           </c:if>
@@ -62,7 +65,9 @@
            <li><a href="../food/location.do?page=${i }&ss=${ss}">${i }</a></li>
           </c:if>
          </c:forEach>
-          
+         <c:if test="${endPage<totalpage }">
+          <li><a href="../food/location.do?ss=${ss }&page=${endPage+1}">&gt;</a></li>
+         </c:if>
         </ul>
       </nav>
       <!-- ################################################################################################ --> 
