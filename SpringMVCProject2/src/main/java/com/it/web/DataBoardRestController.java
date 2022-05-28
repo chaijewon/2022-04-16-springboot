@@ -15,6 +15,18 @@ public class DataBoardRestController {
     {
     	
     	String result=""; //<script> ---
+    	boolean bCheck=dao.databoardDelete(no, pwd);
+    	if(bCheck==true)// 삭제
+    	{
+    		result="<script>location.href=\"list.do\";</script>";
+    	}
+    	else //비밀번호가 틀린 상태 
+    	{
+    		result="<script>"
+    			  +"alert(\"Password Fail!!\");"
+    			  +"history.back();"
+    			  +"</script>";
+    	}
     	return result;
     }
 }
