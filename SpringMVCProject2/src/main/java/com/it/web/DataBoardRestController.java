@@ -13,6 +13,7 @@ public class DataBoardRestController {
     @RequestMapping("databoard/delete_ok.do")
     public String databoard_delete_ok(int no,String pwd)
     {
+    	
     	String result=""; //<script> ---
     	return result;
     }
