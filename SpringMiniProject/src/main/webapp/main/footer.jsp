@@ -65,8 +65,8 @@
 <div class="wrapper row5">
   <div id="copyright" class="clear"> 
     <!-- ################################################################################################ -->
-    <p class="fl_left">2022-02-11 1차 프로젝트 <a href="#">SIST 강남 쌍용 교육센터</a></p>
-    <p class="fl_right"><a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">3강의장</a></p>
+    <p class="fl_left">2022-05-28 2차 프로젝트 <a href="#">한국아이티 아카데미</a></p>
+    <p class="fl_right"><a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">301강의장</a></p>
     <!-- ################################################################################################ --> 
   </div>
 </div>

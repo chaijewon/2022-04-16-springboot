@@ -3,9 +3,15 @@ package com.it.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import com.it.dao.*;
 import com.it.vo.*;
 @Controller
@@ -17,7 +23,52 @@ public class FoodController {
    public String food_category_list(int cno,Model model)
    {
 	   // DAO에서 데이터를 읽어서 전송 
+	   List<FoodVO> list=dao.foodCategoryList(cno);
+	   for(FoodVO vo:list)
+	   {
+		   String poster=vo.getPoster();
+		   poster=poster.substring(0, poster.indexOf("^"));//5개
+		   vo.setPoster(poster);
+		   
+		   String address=vo.getAddress();
+		   address=address.substring(0,address.lastIndexOf("지"));//길 => 지번
+		   vo.setAddress(address);
+	   }
+	   CategoryVO vo=dao.categoryInfoData(cno);
+	   
+	   // 전송
+	   model.addAttribute("vo", vo);
+	   model.addAttribute("list", list);
 	   model.addAttribute("main_jsp", "../food/category_list.jsp");
+	   return "main/main";
+   }
+   
+   @GetMapping("food/food_detail_before.do")
+   public String food_detail_before(int no,HttpServletResponse response,RedirectAttributes ra)
+   {
+	   // Cookie 저장 
+	   Cookie cookie=new Cookie("f"+no, String.valueOf(no)); // 문자열 저장이 가능 
+	   // 저장 위치 
+	   cookie.setPath("/");
+	   // 저장 기간 
+	   cookie.setMaxAge(60*60*24);
+	   // 클라이언트 브라우저로 전송 
+	   response.addCookie(cookie);
+	   ra.addAttribute("no", no);
+	   return "redirect:food_detail.do";
+   }
+   @GetMapping("food/food_detail.do")
+   public String food_detail(int no,Model model)
+   {
+	   // DAO를 연결해서 데이터를 가지고 온다 
+	   FoodVO vo=dao.foodDetailData(no);
+	   String address=vo.getAddress();
+	   String addr1=address.substring(0,address.lastIndexOf("지"));
+	   String addr2=address.substring(address.lastIndexOf("지")+3);
+	   model.addAttribute("vo", vo);
+	   model.addAttribute("addr1", addr1);
+	   model.addAttribute("addr2", addr2);
+	   model.addAttribute("main_jsp", "../food/food_detail.jsp");
 	   return "main/main";
    }
    

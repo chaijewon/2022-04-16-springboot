@@ -19,4 +19,13 @@ public class FoodDAO {
   {
 	  return mapper.foodCategoryList(cno);
   }
+  public CategoryVO categoryInfoData(int cno)
+  {
+	  return mapper.categoryInfoData(cno);
+  }
+  
+  public FoodVO foodDetailData(int no)
+  {
+	  return mapper.foodDetailData(no);
+  }
 }

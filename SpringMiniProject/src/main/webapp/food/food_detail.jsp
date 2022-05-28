@@ -64,8 +64,8 @@ $(function(){
 	  </tr>
 	  <tr>
 	    <th width=15%>주소</th>
-	    <td width=85%>${vo.addr1 }<br>
-	       ${vo.addr2 }
+	    <td width=85%>${addr1 }<br>
+	       ${addr2 }
 	    </td>
 	  </tr>
 	  <tr>
@@ -189,7 +189,7 @@ $(function(){
 		var geocoder = new kakao.maps.services.Geocoder();
 		
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch('${vo.addr1}', function(result, status) {
+		geocoder.addressSearch('${addr1}', function(result, status) {
 		
 		    // 정상적으로 검색이 완료됐으면 
 		     if (status === kakao.maps.services.Status.OK) {
