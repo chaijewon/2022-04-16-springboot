@@ -14,6 +14,9 @@ public interface DataBoardMapper {
     	   +"limit #{start},#{rowSize}")
     public List<DataBoardVO> databoardListData(Map map);
     //  ===> 매개변수는 반드시 1개만 설정이 가능 (데이터가 많은 경우 => ~VO,Map)
+    // 총페이지 
+    @Select("SELECT CEIL(COUNT(*)/10.0) FROM databoard")
+    public int databoardTotalPage();
    // 상세 보기(다운로드)
     @Update("UPDATE databoard SET "
     	   +"hit=hit+1 "

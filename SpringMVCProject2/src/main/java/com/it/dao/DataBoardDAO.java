@@ -47,6 +47,10 @@ public class DataBoardDAO {
 	{
 		return mapper.databoardListData(map);
 	}
+	public int databoardTotalPage()
+	{
+		return mapper.databoardTotalPage();
+	}
 	public DataBoardVO databoardDetailData(int no)
 	{
 		mapper.hitIncrement(no);
