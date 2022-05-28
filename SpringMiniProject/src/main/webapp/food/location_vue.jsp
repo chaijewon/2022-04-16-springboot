@@ -42,12 +42,21 @@ h1{
           <header class="heading">지역별 맛집 찾기</header>
           <div class="inline">
            Search:<input type=text size=30 class="input-sm" v-model="ss">
-           <button class="btn btn-sm btn-danger" v-on:click="search()"></button>
+           <button class="btn btn-sm btn-danger" v-on:click="search()">검색</button>
           </div>
           <div style="height: 50px"></div>
          
           <ul class="nospace clear">
-             
+            <span v-for="(vo,index) in find_data">
+             <li class="one_quarter first" v-if="index%4==0">
+              <a href=""><img :src="vo.poster" :title="vo.name"
+               style="width:250px;height:250px"
+              ></a>
+              <li class="one_quarter" v-if="index%4!=0">
+              <a href=""><img :src="vo.poster" :title="vo.name"
+               style="width:250px;height:250px"
+              ></a>
+            </span>
           </ul>
         </figure>
       </div>
@@ -55,7 +64,14 @@ h1{
       <!-- ################################################################################################ -->
       <nav class="pagination">
         <ul>
-           
+           <span v-for="i in totalpage">
+             <li class="current" v-if="curpage==i">
+               <a href="#" v-on:click="pageChange(i)">{{i}}</a>
+             </li>
+             <li v-if="curpage!=i">
+               <a href="#" v-on:click="pageChange(i)">{{i}}</a>
+             </li>
+           </span>
         </ul>
       </nav>
       <!-- ################################################################################################ -->
@@ -93,10 +109,12 @@ h1{
     			})
     		},
     		search:function(){
-    			
+    			this.curpage=1
+    			this.getData()
     		},
     		pageChange:function(page){
-    			
+    			this.curpage=page
+    			this.getData()
     		}
     	}
     })
