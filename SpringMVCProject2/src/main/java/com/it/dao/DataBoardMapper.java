@@ -1,6 +1,7 @@
 package com.it.dao;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
@@ -35,4 +36,17 @@ public interface DataBoardMapper {
    public void databoardInsert(DataBoardVO vo);
    // 수정 
    // 삭제 
+   @Select("SELECT pwd FROM databoard "
+		  +"WHERE no=#{no}")
+   public String databoardGetPassword(int no);
+   
+   @Delete("DELETE FROM databoard "
+		  +"WHERE no=#{no}")
+   public void databoardDelete(int no);
 }
+
+
+
+
+
+

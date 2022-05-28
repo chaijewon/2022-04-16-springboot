@@ -28,7 +28,7 @@ h1 {
         <th width=20% class="danger text-center">번호</th>
         <td width=30% class="text-center">${vo.no }</td>
         <th width=20% class="danger text-center">작성일</th>
-        <td width=30% class="text-center"><fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/></td>
+        <td width=30% class="text-center">${vo.dbday }</td>
        </tr>
        <tr>
         <th width=20% class="danger text-center">이름</th>

@@ -1,5 +1,6 @@
 package com.it.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -59,5 +60,33 @@ public class DataBoardDAO {
 	public void databoardInsert(DataBoardVO vo)
 	{
 		mapper.databoardInsert(vo);
+	}
+	
+	/*
+	 *  @Select("SELECT pwd FROM databoard "
+		  +"WHERE no=#{no}")
+   public String databoardGetPassword(int no);
+   
+   @Delete("DELETE FROM databoard "
+		  +"WHERE no=#{no}")
+   public void databoardDelete(int no);
+	 */
+	public boolean databoardDelete(int no,String pwd)
+	{
+		//DAO는 매개변수 ,리턴형을 마음대로 코딩이 가능 
+		boolean bCheck=false;
+		String db_pwd=mapper.databoardGetPassword(no);//데이터베이스에 저장된 비밀번호 읽기
+		if(pwd.equals(db_pwd))
+		{
+			// 삭제 
+			bCheck=true;
+			mapper.databoardDelete(no);
+		}
+		else
+		{
+			// 삭제안됨
+			bCheck=false;
+		}
+		return bCheck;
 	}
 }
