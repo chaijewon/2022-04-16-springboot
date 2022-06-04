@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.food.dao.BoardMapper">
+  <!-- 목록 -->
+  <select id="boardListData" resultType="com.it.food.vo.BoardVO" parameterType="hashmap">
+    SELECT no,subject,name,DATE_FORMAT(regdate,'%Y-%m-%d') as dbday,hit 
+    FROM board
+    ORDER BY no DESC
+    limit #{start},#{size}
+  </select>
+  <select id="boardTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/10.0) FROM board
+  </select>
+  <!-- 상세보기 -->
+  <!-- 추가 -->
+  <!-- 수정 -->
+  <!-- 삭제 -->
+</mapper>
