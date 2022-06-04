@@ -44,35 +44,38 @@ public class BoardController {
     public String board_insert_ok(BoardEntity vo)
     {
     	dao.save(vo);
-    	return "redirect:/";
+    	return "redirect:/list";
     }
     @GetMapping("/detail")
     public String board_detail(int no,Model model)
     {
-    	//BoardVO vo=service.boardDetailData(no);
-    	//model.addAttribute("vo", vo);
+    	BoardEntity vo=dao.findByNo(no);
+    	vo.setHit(vo.getHit()+1);//조회수 증가
+    	dao.save(vo);
+    	vo=dao.findByNo(no);
+    	model.addAttribute("vo", vo);
     	return "detail";
     }
     @GetMapping("/update")
     public String board_update(int no,Model model)
     {
-    	//BoardVO vo=service.boardUpdateData(no);
-    	//model.addAttribute("vo", vo);
+    	BoardEntity vo=dao.findByNo(no);
+    	model.addAttribute("vo", vo);
     	return "update"; // forward => request를 전송 ==> Model
     }
     @PostMapping("/update_ok")
     public String board_update_ok(BoardEntity vo,RedirectAttributes ra)
     {
-    	// 수정 
-    	//service.boardUpdate(vo);
-    	//ra.addAttribute("no", vo.getNo());
-    	// RedirectAttributes를 이용해서 데이터 전송 
+    	dao.save(vo);
+    	ra.addAttribute("no", vo.getNo());
     	return "redirect:/detail"; // request를 초기화 => 재전송 (sendRedirect())
     }
     @GetMapping("/delete")
     public String board_delete(int no)
     {
     	//service.boardDelete(no);
-    	return "redirect:/";
+    	BoardEntity vo=dao.findByNo(no);
+    	dao.delete(vo);
+    	return "redirect:/list";
     }
 }

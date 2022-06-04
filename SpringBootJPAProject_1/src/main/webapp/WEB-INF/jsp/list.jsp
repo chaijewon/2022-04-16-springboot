@@ -52,9 +52,9 @@ h1 {
       <table class="table">
         <tr>
           <td class="text-right">
-           <a href="/?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-success">이전</a>
+           <a href="/list?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-success">이전</a>
            ${curpage } page / ${totalpage } pages
-           <a href="/?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-info">다음</a>
+           <a href="/list?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-info">다음</a>
           </td>
         </tr>
       </table>
