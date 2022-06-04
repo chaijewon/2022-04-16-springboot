@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.container{
+   margin-top: 50px;
+}
+.row{
+  margin: 0px auto;
+  width:1000px;
+}
+</style>
+</head>
+<body>
+   <div class="container">
+     <h1 class="text-center">Melon Music Top50</h1>
+     <div class="row">
+       <table class="table">
+         <tr>
+          <th class="text-center">순위</td>
+          <th class="text-center"></td>
+          <th class="text-center">곡명</td>
+          <th class="text-center">가수명</td>
+          <th class="text-center">앨범</td>
+         </tr>
+         <tr th:each="vo:${list}">
+           <td class="text-center" th:text="${vo.no}"></td>
+           <td class="text-center">
+             <img th:src="${vo.poster}" style="widows: 30px;height: 30px"
+              th:data-no="${vo.no}"
+             >
+           </td>
+           <td class="text-center" th:text="${vo.title}"></td>
+           <td class="text-center" th:text="${vo.singer}"></td>
+           <td class="text-center" th:text="${vo.album}"></td>
+         </tr>
+       </table>
+     </div>
+   </div>
+</body>
+</html>
