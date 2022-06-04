@@ -12,7 +12,21 @@
     SELECT CEIL(COUNT(*)/10.0) FROM board
   </select>
   <!-- 상세보기 -->
+  <update id="hitIncrement" parameterType="int">
+    UPDATE board SET
+    hit=hit+1
+    WHERE no=#{no}
+  </update>
+  <select id="boardDetailData" resultType="com.it.food.vo.BoardVO" parameterType="int">
+    SELECT no,name,subject,content,DATE_FORMAT(regdate,'%Y-%m-%d') as dbday,hit 
+    FROM board
+    WHERE no=#{no}
+  </select>
   <!-- 추가 -->
+  <insert id="boardInsert" parameterType="com.it.food.vo.BoardVO">
+    INSERT INTO board(name,subject,content,pwd) 
+    VALUES(#{name},#{subject},#{content},#{pwd})
+  </insert>
   <!-- 수정 -->
   <!-- 삭제 -->
 </mapper>

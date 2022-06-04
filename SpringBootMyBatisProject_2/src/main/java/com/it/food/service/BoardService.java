@@ -8,4 +8,7 @@ import com.it.food.vo.BoardVO;
 public interface BoardService {
 	public List<BoardVO> boardListData(Map map);
 	public int boardTotalPage();
+	public void boardInsert(BoardVO vo);
+	//public void hitIncrement(int no);
+	public BoardVO boardDetailData(int no); 
 }

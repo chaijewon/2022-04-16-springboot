@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.*;
 import com.it.food.service.*;
 import com.it.food.vo.*;
@@ -39,5 +41,24 @@ public class FoodController {
 	   model.addAttribute("curpage", curpage);
 	   model.addAttribute("totalpage", totalpage);
 	   return "list";
+    }
+    @GetMapping("/insert")
+    public String board_insert()
+    {
+    	return "insert";
+    }
+    // <form>
+    @PostMapping("/insert_ok")
+    public String board_insert_ok(BoardVO vo)
+    {
+    	service.boardInsert(vo);
+    	return "redirect:/";
+    }
+    @GetMapping("/detail")
+    public String board_detail(int no,Model model)
+    {
+    	BoardVO vo=service.boardDetailData(no);
+    	model.addAttribute("vo", vo);
+    	return "detail";
     }
 }

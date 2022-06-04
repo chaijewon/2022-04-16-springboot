@@ -12,4 +12,7 @@ import com.it.food.vo.BoardVO;
 public interface BoardMapper {
   public List<BoardVO> boardListData(Map map);
   public int boardTotalPage();
+  public void boardInsert(BoardVO vo);
+  public void hitIncrement(int no);
+  public BoardVO boardDetailData(int no); // findByNo(int no)
 }

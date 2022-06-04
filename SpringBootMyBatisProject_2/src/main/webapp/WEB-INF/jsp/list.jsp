@@ -41,7 +41,7 @@ h1 {
 	        <c:forEach var="vo" items="${list }">
 	          <tr>
 	            <td class="text-center" width="10%">${vo.no }</td>
-	            <td width="45%"><a href="detail?no=${vo.no }">${vo.subject }</a></td>
+	            <td width="45%"><a href="/detail?no=${vo.no }">${vo.subject }</a></td>
 	            <td class="text-center" width="15%">${vo.name }</td>
 	            <td class="text-center" width="20%">${vo.dbday }</td>
 	            <td class="text-center" width="10%">${vo.hit }</td>
