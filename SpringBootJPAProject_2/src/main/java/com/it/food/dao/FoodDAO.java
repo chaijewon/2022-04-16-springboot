@@ -24,8 +24,8 @@ menu varchar(4000)
 @Repository
 public interface FoodDAO extends JpaRepository<FoodEntity, Integer>{
     // findByAddressContaining(String address)  => '%데이터%
-	// findByAddressStartsWith => '데이터%'
-	// findByAddressEndsWith => '%데이터'
+	// findByAddressStarting => '데이터%'
+	// findByAddressEnding => '%데이터'
    @Query(value="SELECT no,poster,name,score,address,tel,type,price,"
 		  +"time,parking,menu "
 		  +"FROM foodlocation "
@@ -34,5 +34,18 @@ public interface FoodDAO extends JpaRepository<FoodEntity, Integer>{
    public List<FoodEntity> foodFindData(@Param("address") String address,
 		      @Param("start") Integer start);
    
+   // 총페이지 
+   @Query(value="SELECT CEIL(COUNT(*)/20.0) FROM foodlocation "
+		 +"WHERE address LIKE CONCAT('%',:address,'%')",nativeQuery = true)
+   public int foodTotalPage(@Param("address") String address);
+   // 상세보기 
    public FoodEntity findByNo(@Param("no") Integer no);
 }
+
+
+
+
+
+
+
+
