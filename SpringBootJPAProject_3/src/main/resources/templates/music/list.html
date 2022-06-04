@@ -13,6 +13,46 @@
   width:1000px;
 }
 </style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.posters').hover(function(){
+		$(this).css("cursor","pointer");
+	},function(){
+		$(this).css("cursor","");
+	})
+	// {no:1,title:'',....} => JavaScript (객체) => 표현방법 (JSON)
+	// Front 연결 , 모바일(kotlin) => JSON
+	// VueJS , ReactJS , Ajax 
+	// Spring BOOT => 스프링은 서버 => 출력 (Front-End)
+	$('.posters').click(function(){
+		let no=$(this).attr("data-no");
+		$.ajax({
+			type:'post',
+			url:'/detail',
+			data:{"no":no},
+			success:function(res)
+			{
+				//alert(res);
+				console.log(res);
+				$('#music').attr("src","http://youtube.com/embed/"+res.mkey)
+				$('#title').text(res.title);
+				$('#singer').text(res.singer);
+				$('#album').text(res.album);
+				$('#dialog').dialog({
+					autoOpen:false,
+				    width:500,
+				    height:500,
+				    modal:true
+				}).dialog("open")
+			}
+		})
+		
+	})
+});
+</script>
 </head>
 <body>
    <div class="container">
@@ -30,7 +70,7 @@
            <td class="text-center" th:text="${vo.no}"></td>
            <td class="text-center">
              <img th:src="${vo.poster}" style="widows: 30px;height: 30px"
-              th:data-no="${vo.no}"
+              th:data-no="${vo.no}" class="posters"
              >
            </td>
            <td class="text-center" th:text="${vo.title}"></td>
@@ -38,6 +78,25 @@
            <td class="text-center" th:text="${vo.album}"></td>
          </tr>
        </table>
+     </div>
+     <div id="dialog" title="동영상">
+      <table class="table">
+       <tr>
+         <td>
+          <iframe src="" style="width:450px;height: 300px" id="music"></iframe>
+         </td>
+       </tr>
+       <tr>
+         <td id="title"></td>
+       </tr>
+       <tr>
+         <td id="singer"></td>
+       </tr>
+       <tr>
+         <td id="album"></td>
+       </tr>
+      </table>
+      
      </div>
    </div>
 </body>
