@@ -21,7 +21,7 @@ menu varchar(4000)
  */
 @Getter
 @Setter
-@Entity(name="foodLocation")
+@Entity(name="foodlocation")
 public class FoodEntity {
 	@Id
     private int no;

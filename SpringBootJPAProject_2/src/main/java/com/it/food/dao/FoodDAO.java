@@ -39,7 +39,7 @@ public interface FoodDAO extends JpaRepository<FoodEntity, Integer>{
 		 +"WHERE address LIKE CONCAT('%',:address,'%')",nativeQuery = true)
    public int foodTotalPage(@Param("address") String address);
    // 상세보기 
-   public FoodEntity findByNo(@Param("no") Integer no);
+   public FoodEntity findByNo(Integer no);
 }
 
 

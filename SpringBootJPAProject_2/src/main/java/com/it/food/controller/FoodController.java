@@ -45,6 +45,16 @@ public class FoodController {
    @GetMapping("/food_detail")
    public String food_detail(int no,Model model)
    {
+	   FoodEntity vo=dao.findByNo(no);
+	   model.addAttribute("vo", vo);
 	   return "food/detail";
    }
 }
+
+
+
+
+
+
+
+
