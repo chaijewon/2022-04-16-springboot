@@ -39,4 +39,22 @@ public class BoardServiceImpl implements BoardService{
 		mapper.hitIncrement(no);
 		return mapper.boardDetailData(no);
 	}
+
+	@Override
+	public BoardVO boardUpdateData(int no) {
+		// TODO Auto-generated method stub
+		return mapper.boardDetailData(no);
+	}
+
+	@Override
+	public void boardUpdate(BoardVO vo) {
+		// TODO Auto-generated method stub
+		mapper.boardUpdate(vo);
+	}
+
+	@Override
+	public void boardDelete(int no) {
+		// TODO Auto-generated method stub
+		mapper.boardDelete(no);
+	}
 }

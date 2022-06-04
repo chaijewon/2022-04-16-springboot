@@ -15,4 +15,6 @@ public interface BoardMapper {
   public void boardInsert(BoardVO vo);
   public void hitIncrement(int no);
   public BoardVO boardDetailData(int no); // findByNo(int no)
+  public void boardUpdate(BoardVO vo);
+  public void boardDelete(int no);
 }
